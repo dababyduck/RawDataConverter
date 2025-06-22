@@ -43,6 +43,7 @@ namespace Converter {
         String currentValue;
         byte passedWord = 0;
         int8_t valueMultiplier = 1;
+        //FIX THE NEGATIVE VALUE MULTIPLIER
         for (unsigned int i=0;i<strlen(rawdata);i++) {
             //parsing through each char of raw data
             if (rawdata[i]==divider1) {
@@ -53,7 +54,7 @@ namespace Converter {
             if (rawdata[i]==divider2) {
                 //assign the word
                 if (currentWord != ""&&currentValue != "") {
-                    _assignToVal(currentWord,currentValue.toInt());
+                    _assignToVal(currentWord,currentValue.toInt()*valueMultiplier);
                 }
                 currentWord = "";
                 currentValue = "";
@@ -75,7 +76,7 @@ namespace Converter {
             }
         }
         if (currentWord != ""&&currentValue != "") {
-            _assignToVal(currentWord,currentValue.toInt()); 
+            _assignToVal(currentWord,currentValue.toInt()*valueMultiplier); 
                  
         }
         return endData;
